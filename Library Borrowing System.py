@@ -1,56 +1,36 @@
-borrowed_books = {}  # key: student name, value: book name
+from collections import Counter 
 
-def issue_book():
-    student = input("Enter student name: ").strip()
-    book = input("Enter book name: ").strip()
+members = {
+    "Amar" : 12,
+    "Kedar" : 1,
+    "Rohan" : 3,
+    "Rohit" : 5,
+    "Tejas" : 0,
+    "Kiran" : 9
 
-    if student in borrowed_books:
-        print("Error: This student already has a borrowed book.")
-        return
-    
-    borrowed_books[student] = book
-    print(f"Book '{book}' issued to {student}.")
+}
 
-def return_book():
-    student = input("Enter student name: ").strip()
 
-    if student not in borrowed_books:
-        print("Error: No record found for this student.")
-        return
-    
-    returned_book = borrowed_books.pop(student)
-    print(f"Book '{returned_book}' returned by {student}.")
+books ={
+    "css" : 3,
+    "c++" : 2,
+    "java" :5,
+    "javascript" : 1,
+    "python": 10
+}
 
-def display_records():
-    if not borrowed_books:
-        print("No borrowing records found.")
-        return
 
-    print("\nBorrowing Records:")
-    for student, book in borrowed_books.items():
-        print(f"Student: {student}  |  Book: {book}")
-    print()
+AvgBookBorrowed = sum(members.values())/len(members)
+HigestBorrowedBook = max(books,key=books.get)
+LowestBorrowedBook = min(books,key=books.get)
+ZeroBorrowedBook = list(members.values()).count(0)
+BorrowedCount = Counter(members.values())
+MostFrequentlyBorrowedBooks = BorrowedCount.most_common(1)[0][0]
 
-def main():
-    while True:
-        print("\n====== Library Menu ======")
-        print("1. Issue Book")
-        print("2. Return Book")
-        print("3. Display Records")
-        print("4. Exit")
 
-        choice = input("Enter choice (1-4): ")
 
-        if choice == '1':
-            issue_book()
-        elif choice == '2':
-            return_book()
-        elif choice == '3':
-            display_records()
-        elif choice == '4':
-            print("Exiting Program.")
-            break
-        else:
-            print("Invalid input, enter 1–4 only.")
-
-main()
+print("avarge Books Borrowed : ",AvgBookBorrowed)
+print("Highest Borrowed Book :",HigestBorrowedBook)
+print("Lowest Borrowed Book :",LowestBorrowedBook)
+print("Zero Borrowed book : ",ZeroBorrowedBook)
+print("Most Frequently Borrowed Book : ",MostFrequentlyBorrowedBooks)
